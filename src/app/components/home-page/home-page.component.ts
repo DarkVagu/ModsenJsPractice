@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as WeatherStore from "../../store";
+import { GetWeather } from 'src/app/store/action/action';
 
 @Component({
   selector: 'app-home-page',
@@ -9,36 +9,27 @@ import * as WeatherStore from "../../store";
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent {
-  constructor(private store: Store<WeatherStore.state>) { }
-
-  movies$: Observable<any> = this.store.select(state => state.weather);
+  constructor(private store: Store<{ weather: any }>) {
+    this.weather$ = store.select('weather')
+  }
+  tempWeather: number = 0
+  weather$: Observable<any> | undefined
 
   ngOnInit() {
-    // this.weatherService.geStormglasstWeather().subscribe(data => {
-    //   console.log(data)
-    //   localStorage.setItem('Stormglasst', JSON.stringify(data))
-    //   console.log(localStorage.getItem('Stormglasst'))
-    // })
-
-
-    // this.weatherService.getOpenWeatherMap().subscribe(data => {
-    //   console.log(data)
-    //   localStorage.setItem('OpenWeatherMap', JSON.stringify(data))
-    //   console.log(localStorage.getItem('OpenWeatherMap'))
-    //   this.weather = localStorage.getItem('OpenWeatherMap')
-    //   if (this.weather != null) {
-    //     this.weather = JSON.parse(this.weather)
-    //   }
-    //   //console.log(JSON.parse(this.weather))
-    // })
-
-    this.store.dispatch({ type: WeatherStore.GetWeatherAction })
-
+    this.store.dispatch(GetWeather())
+    this.weather$?.subscribe(data => {
+      if (data.data.main.temp != undefined) {
+        this.tempWeather = Math.ceil((+data.data.main.temp - 273.15) * 100) / 100
+      }
+    }
+    )
   }
 
   getWeather() {
-    this.movies$.subscribe(data => {
-      console.log(data)
-    })
+    if (this.weather$ != undefined) {
+      this.weather$.subscribe(data => {
+        data.loading == true ? console.log("loading error") : console.log(data)
+      })
+    }
   }
 }

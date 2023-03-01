@@ -1,4 +1,6 @@
-import { GetWeatherAction, GetWeatherFailAction, GetWeatherSuccessAction, WeatherActions } from '../action/action';
+import { createReducer, on } from '@ngrx/store';
+import { GetWeatherFail, GetWeatherSuccess } from '../action/action';
+
 
 export interface WeatherState {
     data: Object,
@@ -12,35 +14,18 @@ export const initialState: WeatherState = {
     loading: false
 }
 
-export function reducer(state = initialState, action: WeatherActions): WeatherState {
-    switch (action.type) {
+export const weatherReducer = createReducer(
+    initialState,
+    on(GetWeatherSuccess, (state, { payload }) => ({
+        ...state,
+        data: payload,
+        loaded: true
+    })),
 
-        case GetWeatherAction: {
-            console.log("From Reducer Action Fetch");
-            return {
-                ...state, loading: true
-            }
-        }
+    on(GetWeatherFail, (state) => ({
+        ...state,
+        loading: true
+    }))
+)
 
-        case GetWeatherSuccessAction: {
-            console.log("From Reducer Action Success", action.payload)
-            const data = action.payload;
 
-            return {
-                ...state, loading: false, loaded: true, data
-            }
-        }
-
-        case GetWeatherFailAction: {
-
-            console.log("From Reducer Action Fail", action.payload)
-            const data = action.payload;
-            return {
-                ...state, loading: false, loaded: false, data
-            }
-        }
-        default:
-            return state
-    }
-
-}

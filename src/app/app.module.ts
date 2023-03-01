@@ -12,7 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { WeatherComponent } from './components/weather/weather.component';
 import { SearchComponent } from './components/weather/search/search.component';
-import { reducer } from './store/reducers/weather.reducer';
+import { weatherReducer } from './store/reducers/weather.reducer';
 import { WeatherEffects } from './store/effects/effects';
 
 const appRoutes: Routes = [
@@ -31,7 +31,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    StoreModule.forRoot(reducer),
+    StoreModule.forRoot({ weather: weatherReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     EffectsModule.forRoot([WeatherEffects])
   ],
