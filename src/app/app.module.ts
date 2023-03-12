@@ -6,7 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomePageComponent } from './components/home-page/home-page.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
@@ -19,8 +18,7 @@ import { cityReducer } from './store/reducers/city.reducer';
 import { ShowWeatherComponent } from './components/weather/show-weather/show-weather.component';
 
 const appRoutes: Routes = [
-  { path: '', component: WeatherComponent },
-  { path: 'search', component: WeatherComponent }
+  { path: '', component: WeatherComponent }
 ]
 
 @NgModule({
