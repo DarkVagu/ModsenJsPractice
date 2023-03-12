@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { GetWeather } from 'src/app/store/action/action';
+import { GetWeather } from 'src/app/store/action/weather.action';
 
 @Component({
   selector: 'app-home-page',
@@ -16,13 +16,11 @@ export class HomePageComponent {
   weather$: Observable<any> | undefined
 
   ngOnInit() {
-    this.store.dispatch(GetWeather())
+    //this.store.dispatch(GetWeather())
+
     this.weather$?.subscribe(data => {
-      if (data.data.main.temp != undefined) {
-        this.tempWeather = Math.ceil((+data.data.main.temp - 273.15) * 100) / 100
-      }
-    }
-    )
+      this.tempWeather = Math.ceil((+data.data.main.temp - 273.15) * 100) / 100
+    })
   }
 
   getWeather() {

@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Action } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { catchError, exhaustMap, map, switchMap, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { WeatherService } from 'src/app/services/weather.service';
-import { GetWeather, GetWeatherAction, GetWeatherFail, GetWeatherSuccess, GetWeatherSuccessAction } from '../action/action';
+import { GetWeather, GetWeatherFail, GetWeatherSuccess } from '../action/weather.action';
 
 
 @Injectable()
 export class WeatherEffects {
     loadWeather = createEffect(() => this.actions$.pipe(
         ofType(GetWeather),
-        switchMap(() => this.weatherService.getOpenWeatherMap().pipe(
+        switchMap(action => this.weatherService.getOpenWeatherMap(action.lat, action.lon).pipe(
             map(payload => GetWeatherSuccess({ payload })),
             catchError(() => of(GetWeatherFail())))
         )

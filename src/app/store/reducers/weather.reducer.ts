@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { GetWeatherFail, GetWeatherSuccess } from '../action/action';
+import { GetWeatherFail, GetWeatherSuccess } from '../action/weather.action';
 
 
 export interface WeatherState {

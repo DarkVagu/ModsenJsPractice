@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule, isDevMode, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -13,17 +13,22 @@ import { EffectsModule } from '@ngrx/effects';
 import { WeatherComponent } from './components/weather/weather.component';
 import { SearchComponent } from './components/weather/search/search.component';
 import { weatherReducer } from './store/reducers/weather.reducer';
-import { WeatherEffects } from './store/effects/effects';
+import { WeatherEffects } from './store/effects/weather.effects';
+import { CityEffects } from './store/effects/city.effets';
+import { cityReducer } from './store/reducers/city.reducer';
+import { ShowWeatherComponent } from './components/weather/show-weather/show-weather.component';
 
 const appRoutes: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', component: WeatherComponent },
+  { path: 'search', component: WeatherComponent }
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     WeatherComponent,
-    SearchComponent
+    SearchComponent,
+    ShowWeatherComponent
   ],
   imports: [
     BrowserModule,
@@ -31,9 +36,9 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    StoreModule.forRoot({ weather: weatherReducer }),
+    StoreModule.forRoot({ weather: weatherReducer, city: cityReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([WeatherEffects])
+    EffectsModule.forRoot([WeatherEffects, CityEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

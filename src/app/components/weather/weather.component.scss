@@ -1,0 +1,14 @@
+.container{
+    display: flex;
+    margin: 10px 30px;
+    &__left{
+        display: flex;
+        flex-basis: 70%;
+        justify-content: space-between;
+    }
+    &__right{
+        display: flex;
+        flex-direction: column;
+        flex-basis: 30%;
+    }
+}

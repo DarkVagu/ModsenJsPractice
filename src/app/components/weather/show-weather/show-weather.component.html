@@ -1,0 +1,59 @@
+<div class="weatherContainer__temp">
+    <div class="weatherContainer__temp__img">
+        <img *ngIf="main === 'Snow' " src="../../../../assets/weather icons/(snow)snow rain.svg" alt="snow">
+        <img *ngIf="main === 'Clouds' " src="../../../../assets/weather icons/(cloud)few clouds.svg" alt="clouds">
+        <img *ngIf="main === 'Clear' " src="../../../../assets/weather icons/(clear)clear sky.svg" alt="">
+        <img *ngIf="main === 'Rain'" src="../../../../assets/weather icons/rain.svg" alt="">
+        <img *ngIf="main === 'Mist'" src="../../../../assets/weather icons/mist.svg" alt="">
+    </div>
+    <div class="weatherContainer__temp__text">
+        <p>{{temp}} C</p>
+    </div>
+    <!-- <div class="weatherContainer__temp__point">
+        <div class="weatherContainer__temp__point__img">
+            ()
+        </div>
+        <div class="weatherContainer__temp__point__text">
+            Витебск
+        </div>
+    </div>
+    <div class="weatherContainer__temp__date">
+        <div class="weatherContainer__temp__date__img">
+            ()
+        </div>
+        <div class="weatherContainer__temp__date__text">
+            8 марта
+        </div>
+    </div> -->
+</div>
+<div class="weatherContainer__discription">
+    <div class="weatherContainer__discription__block">
+        <div class="weatherContainer__discription__block__img">
+            <img src="../../../../assets/weather icons/speed.svg" alt="">
+        </div>
+        <div class="weatherContainer__discription__block__text">
+            <div class="weatherContainer__discription__block__text__title">
+                Wind speed
+            </div>
+            <div class="weatherContainer__discription__block__param">
+                {{speed}} m/s
+            </div>
+
+        </div>
+    </div>
+    <div class="weatherContainer__discription__block">
+        <div class="weatherContainer__discription__block__img">
+            <img src="../../../../assets/weather icons/humidity.svg" alt="">
+        </div>
+        <div class="weatherContainer__discription__block__text">
+            <div class="weatherContainer__discription__block__text__title">
+                Humidity
+            </div>
+            <div class="weatherContainer__discription__block__param">
+                {{humidity}} %
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,4 +1,36 @@
 <div class="search">
-    <input #city type="text" placeholder="Город">
-    <button (click)="getCity(city.value)">Поиск</button>
+
+    <input #cities type="text" placeholder="Город">
+    <div class="search__img" (click)="getCity(cities.value)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+            <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="8.5" cy="8.5" r="5" />
+                <path d="M17.571 17.5L12 12" />
+            </g>
+        </svg>
+    </div>
+
+</div>
+
+<div *ngFor="let city of loadedCities" class="search__block" (click)="getWeatheByCoordinates(city)">
+    <div class="search__block__title">
+        {{city.name}}
+    </div>
+    <div class="search__block__discription">
+        <div class="search__block__discription__top">
+            Сountry:
+        </div>
+        <div class="search__block__discription_botom">
+            {{city.country}}
+        </div>
+    </div>
+    <div class="search__block__discription" *ngIf='city.state'>
+        <div class="search__block__discription__top">
+            state:
+        </div>
+        <div class="search__block__discription_botom">
+            {{city.state}}
+        </div>
+    </div>
+
 </div>
