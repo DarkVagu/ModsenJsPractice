@@ -4,17 +4,7 @@
             <p>{{weather.temp}} C</p>
         </div>
         <div class="weatherContainerTempImg">
-            <img *ngIf="weather.main === 'Snow'" src="../../../../assets/weather icons/(snow)snow rain.svg" alt="Snow">
-            <img *ngIf="weather.main === 'Clouds' " src="../../../../assets/weather icons/(cloud)few clouds.svg"
-                alt="Clouds">
-            <img *ngIf="weather.main === 'Clear' " src="../../../../assets/weather icons/(clear)clear sky.svg"
-                alt="Clear">
-            <img *ngIf="weather.main === 'Rain'" src="../../../../assets/weather icons/rain.svg" alt="Rain">
-            <img *ngIf="weather.main === 'Mist'" src="../../../../assets/weather icons/mist.svg" alt="Mist">
-            <img *ngIf="weather.main === 'Overcast'" src="../../../../assets/weather icons/(cloud)few clouds.svg"
-                alt="Overcast">
-            <img *ngIf="weather.main === 'Partially cloudy'"
-                src="../../../../assets/weather icons/(cloud)few clouds.svg" alt="Partially cloudy">
+            <img src="../../../../assets/weather icons/{{weather.main}}.svg" alt="weather-ico">
         </div>
         <div class="weatherContainerTempTime">
             <div class="weatherContainerTempPoint">

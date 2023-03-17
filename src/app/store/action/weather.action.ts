@@ -2,10 +2,10 @@ import { createAction, props } from '@ngrx/store';
 import { Weather } from 'src/app/models/weather';
 
 export const enum WeatherAction {
-  GetOtherApiWeatherAction = 'Get Other Api Weather',
-  GetWeatherAction = 'Get Weather',
-  GetWeatherFailAction = 'Get Weather Fail',
-  GetWeatherSuccessAction = 'Get Weather Success',
+  GetOtherApiWeatherAction = '[Weather] Get Other Api Weather',
+  GetWeatherAction = '[Weather] Get Weather',
+  GetWeatherFailAction = '[Weather] Get Weather Fail',
+  GetWeatherSuccessAction = '[Weather] Get Weather Success',
 }
 
 export const GetOtherApiWeather = createAction(

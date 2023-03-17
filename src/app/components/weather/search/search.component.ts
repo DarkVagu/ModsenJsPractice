@@ -30,11 +30,8 @@ export class SearchComponent {
   weather$: Observable<any> | undefined;
   cityName: string = '';
 
-  onSubmit(): void {
-    this.getCity(this.loginForm.value.name);
-  }
-
-  getCity(title: string): void {
+  getCity(): void {
+    const title = this.loginForm.value.name;
     this.store.dispatch(GetCity({ payload: title }));
     this.cityName = title;
     this.city$?.subscribe((data) => {
