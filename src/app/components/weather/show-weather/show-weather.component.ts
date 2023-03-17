@@ -1,38 +1,48 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Weather } from 'src/app/models/weather';
+import { CityService } from 'src/app/services/city.service';
+import { WeatherService } from 'src/app/services/weather.service';
 import { GetWeather } from 'src/app/store/action/weather.action';
 
 @Component({
   selector: 'app-show-weather',
   templateUrl: './show-weather.component.html',
-  styleUrls: ['./show-weather.component.scss']
+  styleUrls: ['./show-weather.component.scss'],
 })
 export class ShowWeatherComponent {
-  constructor(private store: Store<{ city: any, weather: any }>) {
+  constructor(
+    private store: Store<{ weather: any; city: any }>,
+    private weatherService: WeatherService,
+    private cityService: CityService
+  ) {
     this.weather$ = store.select('weather');
+    this.city$ = store.select('city');
   }
   weather$: Observable<any> | undefined;
-  speed: number | undefined;
-  temp: number | undefined;
-  humidity: number | undefined;
-  main: string | undefined;
-
+  city$: Observable<any> | undefined;
+  now: string = '';
+  cityName: string = '';
+  weather: Weather = {
+    main: '',
+    temp: 0,
+    speed: 0,
+    humidity: 0,
+  };
 
   ngOnInit() {
-    navigator.geolocation.getCurrentPosition(data => {
-      this.store.dispatch(GetWeather({ lat: data.coords.latitude, lon: data.coords.longitude }));
-    })
+    this.weatherService.init();
 
+    this.weather$?.subscribe((result) => {
+      this.weather = result.data;
+    });
 
-    this.weather$?.subscribe(result => {
+    this.city$?.subscribe((result) => {
+      this.cityName = result.name;
+    });
 
-      this.speed = result.data.wind.speed;
-      this.temp = Math.round(+result.data.main.temp - 273.15);
-      this.humidity = result.data.main.humidity;
-      this.main = result.data.weather[0].main;
-    })
-
+    const today = new Date();
+    this.now = today.toDateString();
   }
-
 }

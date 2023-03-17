@@ -1,59 +1,66 @@
-<div class="weatherContainer__temp">
-    <div class="weatherContainer__temp__img">
-        <img *ngIf="main === 'Snow' " src="../../../../assets/weather icons/(snow)snow rain.svg" alt="snow">
-        <img *ngIf="main === 'Clouds' " src="../../../../assets/weather icons/(cloud)few clouds.svg" alt="clouds">
-        <img *ngIf="main === 'Clear' " src="../../../../assets/weather icons/(clear)clear sky.svg" alt="">
-        <img *ngIf="main === 'Rain'" src="../../../../assets/weather icons/rain.svg" alt="">
-        <img *ngIf="main === 'Mist'" src="../../../../assets/weather icons/mist.svg" alt="">
-    </div>
-    <div class="weatherContainer__temp__text">
-        <p>{{temp}} C</p>
-    </div>
-    <!-- <div class="weatherContainer__temp__point">
-        <div class="weatherContainer__temp__point__img">
-            ()
+<div class="weatherContainer">
+    <div class="weatherContainerTemp">
+        <div class="weatherContainerTempText">
+            <p>{{weather.temp}} C</p>
         </div>
-        <div class="weatherContainer__temp__point__text">
-            Витебск
+        <div class="weatherContainerTempImg">
+            <img *ngIf="weather.main === 'Snow'" src="../../../../assets/weather icons/(snow)snow rain.svg" alt="Snow">
+            <img *ngIf="weather.main === 'Clouds' " src="../../../../assets/weather icons/(cloud)few clouds.svg"
+                alt="Clouds">
+            <img *ngIf="weather.main === 'Clear' " src="../../../../assets/weather icons/(clear)clear sky.svg"
+                alt="Clear">
+            <img *ngIf="weather.main === 'Rain'" src="../../../../assets/weather icons/rain.svg" alt="Rain">
+            <img *ngIf="weather.main === 'Mist'" src="../../../../assets/weather icons/mist.svg" alt="Mist">
+            <img *ngIf="weather.main === 'Overcast'" src="../../../../assets/weather icons/(cloud)few clouds.svg"
+                alt="Overcast">
+            <img *ngIf="weather.main === 'Partially cloudy'"
+                src="../../../../assets/weather icons/(cloud)few clouds.svg" alt="Partially cloudy">
         </div>
-    </div>
-    <div class="weatherContainer__temp__date">
-        <div class="weatherContainer__temp__date__img">
-            ()
-        </div>
-        <div class="weatherContainer__temp__date__text">
-            8 марта
-        </div>
-    </div> -->
-</div>
-<div class="weatherContainer__discription">
-    <div class="weatherContainer__discription__block">
-        <div class="weatherContainer__discription__block__img">
-            <img src="../../../../assets/weather icons/speed.svg" alt="">
-        </div>
-        <div class="weatherContainer__discription__block__text">
-            <div class="weatherContainer__discription__block__text__title">
-                Wind speed
+        <div class="weatherContainerTempTime">
+            <div class="weatherContainerTempPoint">
+                <div class="weatherContainerTempPointImg">
+                    <img src="../../../../assets/weather icons/map-marker.svg" alt="">
+                </div>
+                <div class="weatherContainerTempPointText">
+                    {{cityName}}
+                </div>
             </div>
-            <div class="weatherContainer__discription__block__param">
-                {{speed}} m/s
+            <div class="weatherContainerTempDate">
+                <div class="weatherContainerTempDateImg">
+                    <img src="../../../../assets/weather icons/calendar-month.svg" alt="">
+                </div>
+                <div class="weatherContainerTempDateText">
+                    {{now}}
+                </div>
             </div>
-
         </div>
     </div>
-    <div class="weatherContainer__discription__block">
-        <div class="weatherContainer__discription__block__img">
-            <img src="../../../../assets/weather icons/humidity.svg" alt="">
-        </div>
-        <div class="weatherContainer__discription__block__text">
-            <div class="weatherContainer__discription__block__text__title">
-                Humidity
+    <div class="weatherContainerDiscription">
+        <div class="weatherContainerDiscriptionBlock">
+            <div class="weatherContainerDiscriptionBlockImg">
+                <img src="../../../../assets/weather icons/speed.svg" alt="">
             </div>
-            <div class="weatherContainer__discription__block__param">
-                {{humidity}} %
+            <div class="weatherContainerDiscriptionBlockText">
+                <div class="weatherContainerDiscriptionBlockTextTitle">
+                    Wind speed
+                </div>
+                <div class="weatherContainerDiscriptionBlockParam">
+                    {{weather.speed}} m/s
+                </div>
             </div>
-
         </div>
-
+        <div class="weatherContainerDiscriptionBlock">
+            <div class="weatherContainerDiscriptionBlockImg">
+                <img src="../../../../assets/weather icons/humidity.svg" alt="">
+            </div>
+            <div class="weatherContainerDiscriptionBlockText">
+                <div class="weatherContainerDiscriptionBlockTextTitle">
+                    Humidity
+                </div>
+                <div class="weatherContainerDiscriptionBlockParam">
+                    {{weather.humidity}} %
+                </div>
+            </div>
+        </div>
     </div>
 </div>

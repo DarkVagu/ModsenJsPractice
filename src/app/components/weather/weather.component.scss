@@ -1,14 +1,24 @@
-.container{
+.container {
+  display: flex;
+  height: 100vh;
+  background-image: url(../../../assets/weather/pero-kalimero-9BJRGlqoIUk-unsplash.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position-y: center;
+  &Left {
     display: flex;
-    margin: 10px 30px;
-    &__left{
-        display: flex;
-        flex-basis: 70%;
-        justify-content: space-between;
-    }
-    &__right{
-        display: flex;
-        flex-direction: column;
-        flex-basis: 30%;
-    }
+    align-items: center;
+    flex-basis: 65%;
+    align-items: end;
+    margin: 80px 120px;
+  }
+  &Right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-basis: 35%;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(11px);
+  }
 }
