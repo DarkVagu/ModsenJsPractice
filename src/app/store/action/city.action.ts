@@ -1,13 +1,31 @@
-import { createAction, props } from "@ngrx/store";
+import { createAction, props } from '@ngrx/store';
 
-export const GetCityAction = "Get City";
-export const GetCitySuccessAction = "Get City Success"
-export const GetCityFailAction = "Get City Fail"
+export const enum CityAction {
+  GetCityNameSuccessAction = 'Get City Name Success',
+  GetCityNameAction = 'Get City Name',
+  GetCityAction = 'Get City',
+  GetCitySuccessAction = 'Get City Success',
+  GetCityFailAction = 'Get City Fail',
+}
 
-export const GetCity = createAction(GetCityAction,
-    props<{ payload: string }>());
+export const GetCityName = createAction(
+  CityAction.GetCityNameAction,
+  props<{ lat: number; lon: number }>()
+);
 
-export const GetCitySuccess = createAction(GetCitySuccessAction,
-    props<{ payload: any }>());
+export const GetCityNameSuccess = createAction(
+  CityAction.GetCityNameSuccessAction,
+  props<{ payload: string }>()
+);
 
-export const GetCityFail = createAction(GetCityFailAction);
+export const GetCity = createAction(
+  CityAction.GetCityAction,
+  props<{ payload: string }>()
+);
+
+export const GetCitySuccess = createAction(
+  CityAction.GetCitySuccessAction,
+  props<{ payload: any }>()
+);
+
+export const GetCityFail = createAction(CityAction.GetCityFailAction);

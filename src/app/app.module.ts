@@ -1,6 +1,6 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule, isDevMode, Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -16,17 +16,30 @@ import { WeatherEffects } from './store/effects/weather.effects';
 import { CityEffects } from './store/effects/city.effets';
 import { cityReducer } from './store/reducers/city.reducer';
 import { ShowWeatherComponent } from './components/weather/show-weather/show-weather.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { Interceptor } from './services/interceptor/intercepter';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const appRoutes: Routes = [
-  { path: '', component: WeatherComponent }
-]
+  { path: '', component: WeatherComponent },
+  { path: '**', component: NotFoundComponent },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     WeatherComponent,
     SearchComponent,
-    ShowWeatherComponent
+    ShowWeatherComponent,
+    SpinnerComponent,
+    NotFoundComponent,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: Interceptor,
+      multi: true,
+    },
   ],
   imports: [
     BrowserModule,
@@ -34,11 +47,11 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot({ weather: weatherReducer, city: cityReducer }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([WeatherEffects, CityEffects])
+    EffectsModule.forRoot([WeatherEffects, CityEffects]),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

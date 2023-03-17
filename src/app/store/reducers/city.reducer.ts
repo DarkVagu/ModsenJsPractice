@@ -1,28 +1,39 @@
-import { createReducer, on } from "@ngrx/store"
-import { GetCityFail, GetCitySuccess } from "../action/city.action"
+import { createReducer, on } from '@ngrx/store';
+import {
+  GetCityFail,
+  GetCityNameSuccess,
+  GetCitySuccess,
+} from '../action/city.action';
 
 export interface CityState {
-    data: object,
-    loaded: boolean,
-    loading: boolean
+  data: object;
+  name: string;
+  loaded: boolean;
+  loading: boolean;
 }
 
 export const initialState: CityState = {
-    data: {},
-    loaded: false,
-    loading: false
-}
+  data: {},
+  name: '',
+  loaded: false,
+  loading: false,
+};
 
 export const cityReducer = createReducer(
-    initialState,
-    on(GetCitySuccess, (state, { payload }) => ({
-        ...state,
-        data: payload,
-        loaded: true
-    })),
+  initialState,
+  on(GetCitySuccess, (state, { payload }) => ({
+    ...state,
+    data: payload,
+    loaded: true,
+  })),
 
-    on(GetCityFail, (state) => ({
-        ...state,
-        loading: true
-    }))
-)
+  on(GetCityFail, (state) => ({
+    ...state,
+    loading: true,
+  })),
+
+  on(GetCityNameSuccess, (state, { payload }) => ({
+    ...state,
+    name: payload,
+  }))
+);
