@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Weather } from 'src/app/models/weather';
-import { CityService } from 'src/app/services/city.service';
 import { WeatherService } from 'src/app/services/weather.service';
-import { GetWeather } from 'src/app/store/action/weather.action';
+import { state } from 'src/app/store/reducers';
 
 @Component({
   selector: 'app-show-weather',
@@ -13,9 +12,8 @@ import { GetWeather } from 'src/app/store/action/weather.action';
 })
 export class ShowWeatherComponent {
   constructor(
-    private store: Store<{ weather: any; city: any }>,
-    private weatherService: WeatherService,
-    private cityService: CityService
+    private store: Store<state>,
+    private weatherService: WeatherService
   ) {
     this.weather$ = store.select('weather');
     this.city$ = store.select('city');
@@ -31,7 +29,7 @@ export class ShowWeatherComponent {
     humidity: 0,
   };
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.weatherService.init();
 
     this.weather$?.subscribe((result) => {

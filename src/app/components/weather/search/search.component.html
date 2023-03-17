@@ -1,18 +1,16 @@
 <div>
-    <div class="search">
-        <div class="searchInput">
-            <input #city type="text" placeholder="Сity">
-        </div>
-        <div class="searchImg" (click)="getCity(city.value)">
-            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+    <form class="search" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="searchInput"><input type="text" formControlName="name" placeholder="Сity"></div>
+        <button type="submit" class="searchImg"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="21"
+                viewBox="0 0 21 21">
                 <g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                     color="white">
                     <circle cx="8.5" cy="8.5" r="5" />
                     <path d="M17.571 17.5L12 12" />
                 </g>
             </svg>
-        </div>
-    </div>
+        </button>
+    </form>
     <div class="notFound" *ngIf="loadedCity.length == 0">
         City not found
     </div>
